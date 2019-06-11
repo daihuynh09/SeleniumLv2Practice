@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test thread-count="5" name="Test">
+		<parameter name="browser" value="CHROME_LOCAL" />
+		<classes>
+			<class name="com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard">
+				<methods>
+					<include name="Valid_Login" />
+					<include name="Login_Invalid_Credential" />
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

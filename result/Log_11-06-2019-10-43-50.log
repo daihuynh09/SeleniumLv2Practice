@@ -1,0 +1,4 @@
+2019-06-11 22:43:59 INFO  BaseTest:29 - Open URL
+2019-06-11 22:44:21 INFO  DA_LOGIN_TC001_LoginDashboard:19 - Login with valid credential
+2019-06-11 22:44:24 INFO  BaseTest:29 - Open URL
+2019-06-11 22:44:46 INFO  DA_LOGIN_TC001_LoginDashboard:33 - Login with invalid credential

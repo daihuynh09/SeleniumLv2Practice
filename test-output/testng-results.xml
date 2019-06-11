@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="13358" started-at="2019-06-11T15:45:33Z" finished-at="2019-06-11T15:45:46Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="13358" started-at="2019-06-11T15:45:33Z" finished-at="2019-06-11T15:45:46Z">
+      <class name="com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard">
+        <test-method status="PASS" signature="beforeTest(java.lang.String)[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="beforeTest" is-config="true" duration-ms="12" started-at="2019-06-11T15:45:33Z" finished-at="2019-06-11T15:45:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CHROME_LOCAL]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="beforeMethod" is-config="true" duration-ms="4552" started-at="2019-06-11T15:45:33Z" finished-at="2019-06-11T15:45:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="Valid_Login()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="Valid_Login" duration-ms="2263" started-at="2019-06-11T15:45:37Z" description="Verify that user can login specific repository successfully via Dashboard login page with correct credentials" finished-at="2019-06-11T15:45:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Valid_Login -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="afterMethod" is-config="true" duration-ms="812" started-at="2019-06-11T15:45:40Z" finished-at="2019-06-11T15:45:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="beforeMethod" is-config="true" duration-ms="3860" started-at="2019-06-11T15:45:40Z" finished-at="2019-06-11T15:45:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="Login_Invalid_Credential()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="Login_Invalid_Credential" duration-ms="986" started-at="2019-06-11T15:45:44Z" description="Verify that user fails to login specific repository successfully via Dashboard login page with incorrect credentials" finished-at="2019-06-11T15:45:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login_Invalid_Credential -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="afterMethod" is-config="true" duration-ms="853" started-at="2019-06-11T15:45:45Z" finished-at="2019-06-11T15:45:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard@4b4523f8]" name="afterTest" is-config="true" duration-ms="2" started-at="2019-06-11T15:45:46Z" finished-at="2019-06-11T15:45:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

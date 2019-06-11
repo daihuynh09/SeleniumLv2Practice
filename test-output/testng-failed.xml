@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test(failed)">
+    <parameter name="browser" value="CHROME_LOCAL"/>
+    <classes>
+      <class name="com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard">
+        <methods>
+          <include name="Login_Invalid_Credential"/>
+          <include name="Valid_Login"/>
+          <include name="afterMethod"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

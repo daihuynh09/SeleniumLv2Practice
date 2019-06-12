@@ -29,25 +29,44 @@ public class BasePage extends PageGenerator {
 	}
 	
 	/**
+	 * Select menu item on page
+	 * 
+	 * @param menuItem Menu item with format: node1->node2->...->nodeN
+	 * @param timeOutInSeconds Time out (seconds)
+	 * @throws Exception
+	 */
+	public void selectMenuItem(String menuItem, int timeOutInSeconds) throws Exception {
+		String itemFormat = "//*[@class='head-menu']//a[.='%s']";
+		String itemXpath;
+		String[] arrItems = menuItem.split("->");
+		for(String item : arrItems) {
+			itemXpath = itemFormat;
+			itemXpath = String.format(itemFormat, item.trim());
+			By itemLocator = By.xpath(itemXpath);
+			waitForDisplay(itemLocator, timeOutInSeconds);
+			click(itemLocator);
+		}
+	}
+	
+	/**
 	 * Does Element Exist
 	 * 
 	 * @param elementAttr WebElement or By type
 	 * @return WebElement or null
 	 */
-	public <T> Optional<WebElement> doesElementExist(T elementAttr) {
-        try {
-        	if (elementAttr.getClass().getName().contains("By")) {
-        		return Optional.of(driver.findElement((By) elementAttr));
-			} else {
-				if (((WebElement) elementAttr).isDisplayed()) {
-	                return Optional.of((WebElement) elementAttr);
-	            } else {
-	                return Optional.absent();
-	            }
-			}
-        } catch (NoSuchElementException e) {
-            return Optional.absent();
-        }
+	public <T> boolean doesElementExist(T elementAttr, int timeOutInSeconds) {
+		WebElement elem = null;
+		try {
+			elem = waitForDisplay(elementAttr, timeOutInSeconds);
+			if (elem == null) 
+				return false;
+			else 
+				return true;
+		} catch(Exception e) {
+			LOG.error(e.getMessage());
+			return false;
+		}
+        
     }
 
 	public BasePage waitForPageLoaded() {
@@ -154,6 +173,29 @@ public class BasePage extends PageGenerator {
 			//LOG.info(String.format("Wait for control %s to be invisibled", locator.toString()));
 			WebDriverWait wait = new WebDriverWait(this.driver, timeOutInSeconds);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		} catch (Exception error) {
+			LOG.error(String.format("Has error with control '%s': %s", locator.toString(), error.getMessage()));
+			throw error;
+		}
+	}
+	
+	public void waitForAllInvisibility(List<WebElement> elements, int timeOutInSeconds) throws Exception {
+		try {
+			//LOG.info(String.format("Wait for all control %s to be invisibled", locator.toString()));
+			WebDriverWait wait = new WebDriverWait(this.driver, timeOutInSeconds);
+			wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
+		} catch (Exception error) {
+			LOG.error(String.format("Has error with control '%s': %s", elements.toString(), error.getMessage()));
+			throw error;
+		}
+	}
+	
+	public void waitForAllInvisibility(By locator, int timeOutInSeconds) throws Exception {
+		try {
+			//LOG.info(String.format("Wait for all control %s to be invisibled", locator.toString()));
+			List<WebElement> elements = driver.findElements(locator);
+			WebDriverWait wait = new WebDriverWait(this.driver, timeOutInSeconds);
+			wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
 		} catch (Exception error) {
 			LOG.error(String.format("Has error with control '%s': %s", locator.toString(), error.getMessage()));
 			throw error;

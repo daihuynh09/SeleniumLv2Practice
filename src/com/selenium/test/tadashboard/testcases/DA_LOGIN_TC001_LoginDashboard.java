@@ -1,6 +1,7 @@
 package com.selenium.test.tadashboard.testcases;
 
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import com.selenium.testfw.common.*;
 import com.selenium.test.tadashboard.pom.*;
@@ -56,7 +57,9 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 		HomePage homePage = loginPage.loginValid(Constant.USERNAME, Constant.PASSWORD, Constant.REPO);
 		
 		LOG.info("Log out");
-		//homePage.logOut();
+		loginPage = homePage.logout();
 	
+		LOG.info("Verify: User is navigated to Login page");
+		Assert.assertTrue(loginPage.isAt(Constant.ELEMENT_TIMEOUT));
 	}
 }

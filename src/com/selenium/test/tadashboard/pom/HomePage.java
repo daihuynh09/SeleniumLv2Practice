@@ -1,5 +1,6 @@
 package com.selenium.test.tadashboard.pom;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,8 @@ import com.selenium.testfw.common.*;
 
 public class HomePage extends BasePage {
 
+	By imgIconLoading = By.xpath("//img[@src='images/loading.gif']");
+	
 	@FindBy(xpath = "//a[text()='Repository: ']/span")
 	private WebElement txtRepoName;
 	
@@ -35,5 +38,21 @@ public class HomePage extends BasePage {
 	
 	public void checkLoginUserDisplay(String userName) throws Exception {
 		Assert.assertEquals(getUserLogin(), userName);
+	}
+	
+	public void waitForHomePageReady(int timeOutInSeconds) throws Exception {
+		waitForAllInvisibility(imgIconLoading, timeOutInSeconds);
+	}
+	
+	public LoginPage logout() throws Exception {
+		String userLogin = getUserLogin();
+		String menuItem = userLogin + "->" + "Logout";
+		selectMenuItem(menuItem, Constant.ELEMENT_TIMEOUT);
+		return (LoginPage) GetInstance(LoginPage.class).waitForPageLoaded();
+	}
+	
+	public void checkLogoutSuccessfully() {
+		
+		
 	}
 }

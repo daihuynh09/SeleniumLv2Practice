@@ -37,4 +37,26 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 		loginPage.checkAlertMessage("Username or password is invalid", 20);
 
 	}
+	
+	@Test(description = "Verify that user fails to log in specific repository successfully via Dashboard login page with correct username and incorrect password")
+	public void Login_CorrectUsername_InvalidPassword() throws Exception {
+		
+		LOG.info("Login with correct username and invalid password");
+		LoginPage loginPage = page.GetInstance(LoginPage.class).loginInValid(Constant.USERNAME, invalidPass, Constant.REPO);
+		
+		LOG.info("Verify: 'Username or password is invalid' message displays in alert");
+		loginPage.checkAlertMessage("Username or password is invalid", 20);
+	}
+	
+	@Test(description = "Verify that user is able to log in different repositories successfully after logging out current repository")
+	public void Login_Different_Repo_Successfully() throws Exception {
+		
+		LOG.info("Login with valid credential");
+		LoginPage loginPage = page.GetInstance(LoginPage.class);
+		HomePage homePage = loginPage.loginValid(Constant.USERNAME, Constant.PASSWORD, Constant.REPO);
+		
+		LOG.info("Log out");
+		//homePage.logOut();
+	
+	}
 }

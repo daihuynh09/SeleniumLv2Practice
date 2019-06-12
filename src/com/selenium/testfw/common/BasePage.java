@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.google.common.base.Optional;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +27,28 @@ public class BasePage extends PageGenerator {
 	public BasePage(WebDriver driver) {
 		super(driver);
 	}
+	
+	/**
+	 * Does Element Exist
+	 * 
+	 * @param elementAttr WebElement or By type
+	 * @return WebElement or null
+	 */
+	public <T> Optional<WebElement> doesElementExist(T elementAttr) {
+        try {
+        	if (elementAttr.getClass().getName().contains("By")) {
+        		return Optional.of(driver.findElement((By) elementAttr));
+			} else {
+				if (((WebElement) elementAttr).isDisplayed()) {
+	                return Optional.of((WebElement) elementAttr);
+	            } else {
+	                return Optional.absent();
+	            }
+			}
+        } catch (NoSuchElementException e) {
+            return Optional.absent();
+        }
+    }
 
 	public BasePage waitForPageLoaded() {
 		WebDriverWait wait = new WebDriverWait(this.driver, Constant.DRIVER_TIMEOUT);

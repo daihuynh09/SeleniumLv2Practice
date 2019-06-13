@@ -13,6 +13,7 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 
 	private String invalidUser = "abc";
 	private String invalidPass = "123";
+	private String secondRepo = "SATT";
 
 	@Test(description = "Verify that user can login specific repository successfully via Dashboard login page with correct credentials")
 	public void Valid_Login() throws Exception {
@@ -61,5 +62,22 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 	
 		LOG.info("Verify: User is navigated to Login page");
 		Assert.assertTrue(loginPage.isAt(Constant.ELEMENT_TIMEOUT));
+	}
+	
+	@Test(description = "Verify that there is no Login dialog when switching between 2 repositories with the same account")
+	public void Login_Switch_Repositories( ) throws Exception {
+		
+		LOG.info("Login with valid credential");
+		LoginPage loginPage = page.GetInstance(LoginPage.class);
+		HomePage homePage = loginPage.loginValid(Constant.USERNAME, Constant.PASSWORD, Constant.REPO);
+		
+		LOG.info("Swith to another repo");
+		homePage.selectRepo(secondRepo);
+		
+		LOG.info("Verify: Repo displays correctly");
+		homePage.checkRepoDisplay(secondRepo);
+		
+		LOG.info("Verify: User displays correctly");
+		homePage.checkLoginUserDisplay(Constant.USERNAME);
 	}
 }

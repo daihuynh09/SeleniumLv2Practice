@@ -9,6 +9,8 @@ import org.testng.Assert;
 import com.selenium.testfw.common.*;
 
 public class HomePage extends BasePage {
+	
+	private final String repoXpathFormat = "//ul[@id='ulListRepositories']/li/a[.='%s']";
 
 	By imgIconLoading = By.xpath("//img[@src='images/loading.gif']");
 	
@@ -17,6 +19,9 @@ public class HomePage extends BasePage {
 	
 	@FindBy(xpath = "//a[@href='#Welcome']")
 	private WebElement lnkWelcome;
+	
+	@FindBy(xpath = "//a[contains(.,'Repository: ')]")
+	private WebElement lnkRepository;
 	
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -51,8 +56,11 @@ public class HomePage extends BasePage {
 		return (LoginPage) GetInstance(LoginPage.class).waitForPageLoaded();
 	}
 	
-	public void checkLogoutSuccessfully() {
-		
-		
+	public HomePage selectRepo(String repo) throws Exception {
+		String xpathRepo = String.format(repoXpathFormat, repo);
+		click(lnkRepository);
+		click(waitForDisplay(By.xpath(xpathRepo), Constant.ELEMENT_TIMEOUT));
+		waitForHomePageReady(Constant.ELEMENT_TIMEOUT + 60);
+		return this;
 	}
 }

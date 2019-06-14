@@ -10,8 +10,6 @@ import com.selenium.testfw.common.*;
 
 public class LoginPage extends BasePage {
 	
-	private final int _readyTimeout = 120;
-
 	Select cbRepo = new Select(driver.findElement(By.id("repository")));
 
 	@FindBy(id = "username")
@@ -37,7 +35,7 @@ public class LoginPage extends BasePage {
 	public HomePage loginValid(String username, String password, String repo) throws Exception {
 		login(username, password, repo);
 		HomePage homePage = (HomePage) GetInstance(HomePage.class).waitForPageLoaded();
-		homePage.waitForHomePageReady(_readyTimeout);
+		homePage.waitForIconLoadingNotDisplay(Constant.ELEMENT_TIMEOUT);
 		return homePage;
 	}
 

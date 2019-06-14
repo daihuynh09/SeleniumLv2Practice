@@ -13,7 +13,7 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 
 	private String invalidUser = "abc";
 	private String invalidPass = "123";
-	private String secondRepo = "SATT";
+	private String secondRepo = "Training";
 
 	@Test(description = "Verify that user can login specific repository successfully via Dashboard login page with correct credentials")
 	public void Valid_Login() throws Exception {
@@ -27,6 +27,9 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 
 		LOG.info("Verify: Login User display correctly");
 		homePage.checkLoginUserDisplay(Constant.USERNAME);
+		
+		LOG.info("Log out");
+		homePage.navigationMenu().logout();
 	}
 
 	@Test(description = "Verify that user fails to login specific repository successfully via Dashboard login page with incorrect credentials")
@@ -36,7 +39,7 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 		LoginPage loginPage = page.GetInstance(LoginPage.class).loginInValid(invalidUser, invalidPass, Constant.REPO);
 
 		LOG.info("Verify: 'Username or password is invalid' message displays in alert");
-		loginPage.checkAlertMessage("Username or password is invalid", 20);
+		loginPage.checkAlertMessage("Username or password is invalid", 20);	
 
 	}
 	
@@ -58,7 +61,7 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 		HomePage homePage = loginPage.loginValid(Constant.USERNAME, Constant.PASSWORD, Constant.REPO);
 		
 		LOG.info("Log out");
-		loginPage = homePage.logout();
+		loginPage = homePage.navigationMenu().logout();
 	
 		LOG.info("Verify: User is navigated to Login page");
 		Assert.assertTrue(loginPage.isAt(Constant.ELEMENT_TIMEOUT));
@@ -72,12 +75,15 @@ public class DA_LOGIN_TC001_LoginDashboard extends BaseTest {
 		HomePage homePage = loginPage.loginValid(Constant.USERNAME, Constant.PASSWORD, Constant.REPO);
 		
 		LOG.info("Swith to another repo");
-		homePage.selectRepo(secondRepo);
+		homePage.navigationMenu().goToRepo(secondRepo);
 		
 		LOG.info("Verify: Repo displays correctly");
 		homePage.checkRepoDisplay(secondRepo);
 		
 		LOG.info("Verify: User displays correctly");
 		homePage.checkLoginUserDisplay(Constant.USERNAME);
+		
+		LOG.info("Log out");
+		homePage.navigationMenu().logout();
 	}
 }

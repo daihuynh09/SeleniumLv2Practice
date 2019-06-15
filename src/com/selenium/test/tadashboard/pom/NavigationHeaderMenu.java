@@ -19,6 +19,7 @@ public class NavigationHeaderMenu extends BasePage {
 	
 	protected static final Logger LOG = LogWrapper.createLogger(NavigationHeaderMenu.class.getName());
 	
+	private final String menuItemFormat = "//*[@class='head-menu']//a[.='%s']";
 	private final String repoXpathFormat = "//ul[@id='ulListRepositories']/li/a[.='%s']";
 	
 	@FindBy(xpath = "//a[text()='Repository: ']/span")
@@ -32,6 +33,24 @@ public class NavigationHeaderMenu extends BasePage {
 	
 	public NavigationHeaderMenu(WebDriver driver) {
 		super(driver);
+	}
+	
+	/**
+	 * Select header menu item on page
+	 * 
+	 * @param menuItem Menu item with format: node1->node2->...->nodeN
+	 * @param timeOutInSeconds Time out (seconds)
+	 * @throws Exception
+	 */
+	private void selectHeaderMenuItem(String menuItem, int timeOutInSeconds) throws Exception {	
+		String itemXpath;
+		String[] arrItems = menuItem.split("->");
+		for(String item : arrItems) {
+			itemXpath = String.format(menuItemFormat, item.trim());
+			By itemLocator = By.xpath(itemXpath);
+			waitForDisplay(itemLocator, timeOutInSeconds);
+			click(itemLocator);
+		}
 	}
 
 	public String getUserLogin() throws Exception {
@@ -47,7 +66,7 @@ public class NavigationHeaderMenu extends BasePage {
 	public LoginPage logout() throws Exception {
 		String userLogin = getUserLogin();
 		String menuItem = userLogin + "->" + "Logout";
-		selectMenuItem(menuItem, Constant.ELEMENT_TIMEOUT);
+		selectHeaderMenuItem(menuItem, Constant.ELEMENT_TIMEOUT);
 		return (LoginPage) GetInstance(LoginPage.class).waitForPageLoaded();
 	} 
 	

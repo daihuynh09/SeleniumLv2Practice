@@ -9,7 +9,7 @@ import org.testng.Assert;
 import com.selenium.testfw.common.*;
 
 public class LoginPage extends BasePage {
-
+	
 	Select cbRepo = new Select(driver.findElement(By.id("repository")));
 
 	@FindBy(id = "username")
@@ -34,7 +34,9 @@ public class LoginPage extends BasePage {
 
 	public HomePage loginValid(String username, String password, String repo) throws Exception {
 		login(username, password, repo);
-		return (HomePage) GetInstance(HomePage.class).waitForPageLoaded();
+		HomePage homePage = (HomePage) GetInstance(HomePage.class).waitForPageLoaded();
+		homePage.waitForIconLoadingNotDisplay(Constant.ELEMENT_TIMEOUT);
+		return homePage;
 	}
 
 	public LoginPage loginInValid(String username, String password, String repo) throws Exception {
@@ -46,4 +48,7 @@ public class LoginPage extends BasePage {
 		Assert.assertEquals(getAlertMessage(timeOutInSeconds), message);
 	}
 
+	public boolean isAt(int timeOutInSeconds) {
+		return doesElementExist(btnLogin, timeOutInSeconds);
+	}
 }

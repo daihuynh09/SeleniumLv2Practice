@@ -1,5 +1,6 @@
 package com.selenium.test.tadashboard.pom;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,32 +9,34 @@ import org.testng.Assert;
 import com.selenium.testfw.common.*;
 
 public class HomePage extends BasePage {
-
-	@FindBy(xpath = "//a[text()='Repository: ']/span")
-	private WebElement txtRepoName;
 	
-	@FindBy(xpath = "//a[@href='#Welcome']")
-	private WebElement lnkWelcome;
+	// Elements
+	private final By imgIconLoading = By.xpath("//img[@src='images/loading.gif']");
 	
-	public HomePage(WebDriver driver) {
+	// Page Components
+	private final NavigationHeaderMenu navigationHeaderMenu;
+	
+	
+	public HomePage(WebDriver driver) throws Exception {
 		super(driver);
+		navigationHeaderMenu = GetInstance(NavigationHeaderMenu.class);
 	}
 
-	public String getRepoName() throws Exception {
-		waitForDisplay(txtRepoName, 20);
-		return getText(txtRepoName);		
+	public NavigationHeaderMenu navigationMenu() {
+		return navigationHeaderMenu;
 	}
 	
 	public void checkRepoDisplay(String repoName) throws Exception {
-		Assert.assertEquals(getRepoName(), repoName, "Repo is incorrect");
-	}
-	
-	public String getUserLogin() throws Exception {
-		waitForDisplay(lnkWelcome, 20);
-		return getText(lnkWelcome);
+		Assert.assertEquals(navigationMenu().getRepoName(), repoName, "Repo is incorrect");
 	}
 	
 	public void checkLoginUserDisplay(String userName) throws Exception {
-		Assert.assertEquals(getUserLogin(), userName);
+		Assert.assertEquals(navigationMenu().getUserLogin(), userName);
 	}
+	
+	public void waitForIconLoadingNotDisplay(int timeOutInSeconds) throws Exception {
+		waitForAllInvisibility(imgIconLoading, timeOutInSeconds);
+	}
+	
+	
 }

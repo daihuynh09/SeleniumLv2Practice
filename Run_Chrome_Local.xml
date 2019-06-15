@@ -6,8 +6,10 @@
 		<classes>
 			<class name="com.selenium.test.tadashboard.testcases.DA_LOGIN_TC001_LoginDashboard">
 				<methods>
-					<include name="Valid_Login" />
-					<include name="Login_Invalid_Credential" />
+					<!-- include name="Valid_Login" /-->
+					<!-- include name="Login_Invalid_Credential" /-->
+					<!-- include name="Login_Different_Repo_Successfully" /-->
+					<include name="Login_Switch_Repositories" />
 				</methods>
 			</class>
 		</classes>

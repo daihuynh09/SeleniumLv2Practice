@@ -28,31 +28,12 @@ public class BasePage extends PageGenerator {
 		super(driver);
 	}
 	
-	/**
-	 * Select menu item on page
-	 * 
-	 * @param menuItem Menu item with format: node1->node2->...->nodeN
-	 * @param timeOutInSeconds Time out (seconds)
-	 * @throws Exception
-	 */
-	public void selectMenuItem(String menuItem, int timeOutInSeconds) throws Exception {
-		String itemFormat = "//*[@class='head-menu']//a[.='%s']";
-		String itemXpath;
-		String[] arrItems = menuItem.split("->");
-		for(String item : arrItems) {
-			itemXpath = itemFormat;
-			itemXpath = String.format(itemFormat, item.trim());
-			By itemLocator = By.xpath(itemXpath);
-			waitForDisplay(itemLocator, timeOutInSeconds);
-			click(itemLocator);
-		}
-	}
 	
 	/**
 	 * Does Element Exist
 	 * 
 	 * @param elementAttr WebElement or By type
-	 * @return WebElement or null
+	 * @return boolean
 	 */
 	public <T> boolean doesElementExist(T elementAttr, int timeOutInSeconds) {
 		WebElement elem = null;
